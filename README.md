@@ -7,8 +7,8 @@
 ### - ng serve 
 precisa rodar dentro da página do projeto criado
 
-### - ng generate component 
-ng g c 
+### - ng generate component  /  ng generate interface  /  ng generate service
+ng g c  /  ng g i  /  ng g s
 nome-da-pasta/nome-do-componente
 
 <br><br>
@@ -30,6 +30,8 @@ export class ContainerComponent {
 }
 ```
 
+<br><br>
+
 ## Para importar um componente
 
 ```
@@ -39,4 +41,13 @@ imports: [NomeDoComponente]',
 ...
 ```
 
+<br><br>
+
+## Para aceitar conteúdo dentro da tag do componente
+
+<ng-content />
+
+<br><br>
+
+### @for (item of yourItems; track item.id) {}
 
