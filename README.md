@@ -45,7 +45,7 @@ imports: [NomeDoComponente]',
 
 ## Para aceitar conteúdo dentro da tag do componente
 
-<ng-content />
+```<ng-content />```
 
 <br><br>
 
