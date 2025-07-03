@@ -49,5 +49,8 @@ imports: [NomeDoComponente]',
 
 <br><br>
 
+## Diretivas
+
 ### @for (item of yourItems; track item.id) {}
+
 
