@@ -1,4 +1,4 @@
 # angular-documentation
 
-## ng new [name-of-your-project]
+### ng new [name-of-your-project]
 
