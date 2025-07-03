@@ -49,7 +49,39 @@ imports: [NomeDoComponente]',
 
 <br><br>
 
+## Interpolation
+```{{ yourVar }}```
+
+<br><br>
+
+## Property binding
+```<img [src]="imageURL">```
+
+now, src is bound to the var imageURL
+
+<br><br>
+
+## Event handling
+```<button (click)="yourFunction()">```
+
+define yourFunction in the class definition
+
+<br><br>
+
+## Para receber propriedades do elemento pai
+```
+suaVar = input<seuTipo>();
+
+<app-component suaVar="Ola" />
+
+{{ suaVar() }}
+```
+
+<br><br>
+
 ## Diretivas
+
+### @if () {} @else {}
 
 ### @for (item of yourItems; track item.id) {}
 
