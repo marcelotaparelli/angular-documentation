@@ -110,11 +110,9 @@ yourFunction() {
 handleEvent(arg: seuTipo){
   sua lógica
 }
-
-//na classe
-
-
 ```
+
+Fluxo:  botão ativa yourFunction() na filha que ativa emit(), evento é capturado pela função handleEvent() no pai 
 
 <br><br>
 
