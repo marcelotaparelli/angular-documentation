@@ -61,6 +61,17 @@ now, src is bound to the var imageURL
 
 <br><br>
 
+## Event binding
+```<buton (onclick)="yourFunc()">```
+
+<br><br>
+
+## Two-way data binding (banana() in a box[])
+
+```<input [(ngModel)]= "yourProperty">```
+
+<br><br>
+
 ## Event handling
 ```<button (click)="yourFunction()">```
 
