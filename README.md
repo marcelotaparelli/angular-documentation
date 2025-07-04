@@ -104,7 +104,7 @@ yourFunction() {
 
 
 //no template pai
-<app-componente-filha (yourEvent)="yourFunction($event)" />
+<app-componente-filha (yourEvent)="handleEvent($event)" />
 
 //na classe pai
 handleEvent(arg: seuTipo){
