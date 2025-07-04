@@ -122,4 +122,26 @@ Fluxo:  botão ativa yourFunction() na filha que ativa emit(), evento é captura
 
 ### @for (item of yourItems; track item.id) {}
 
+<br><br>
 
+## Para carregar conteúdos pesados qundo usuário chegar no viewport
+
+Placeholder: é o que fica até o usuario chegar ao viewport
+Loading: o que aparece enquanto está carregando
+Defer: o que vai ser carregado depois
+
+```
+@defer (on viewport) {
+  <comments />
+} @placeholder {
+  <p>Future comments</p>
+} @loading (minimum 2s) {
+  <p>Loading comments...</p>
+}
+```
+
+<br><br>
+
+## To optimize image loading
+
+https://angular.dev/tutorials/learn-angular/11-optimizing-images
