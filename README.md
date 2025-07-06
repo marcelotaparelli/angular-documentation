@@ -198,7 +198,10 @@ Associe cada campo a um FormControl
 
 Acesse os valores do form na sua classe do componente com
 
-```this.yourForm.value```
+```
+this.yourForm.value
+this.yourForm.value.nome
+```
 
 Trabalhe as exceções dos Validators
 
@@ -231,6 +234,12 @@ Invalide o botão de submit
 
 <br><br>
 
+Para resetar o formulário
+
+```
+this.yourForm.reset();
+```
+
 ## Router
 
 Faça a importação
@@ -241,9 +250,32 @@ imports: [...
          RouterOutlet],
 ```
 
+No app.config.ts
+```
+import {ApplicationConfig} from '@angular/core';
+import {provideRouter} from '@angular/router';
+import {routes} from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+providers: [provideRouter(routes)],
+};
+```
+
 Adicione no app.component.html
 ```
-<router-outlet />
+import {RouterOutlet} from '@angular/router';
+@Component({
+...
+template: `     <nav>
+      <a href="/">Home</a>
+      |
+      <a href="/user">User</a>
+    </nav>
+    <router-outlet />
+  `,
+imports: [RouterOutlet],
+})
+export class App {}
 ```
 
 app.routes.ts
@@ -281,9 +313,148 @@ imports: [...
          RouterLink]
 ```
 
+Para usar na lógica do componente
+```
+this.router.navigateByUrl('/your-page');
+```
+
+<br><br>
+
+
+## Dependency Injection (Services)
+
+```
+import {Injectable} from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+
+export class YourService {
+  //your logic...
+}
+```
+
+To inject
+```
+import {Component, inject} from '@angular/core';
+import {YourService} from './your-service.service';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <p>Your Listing: {{ display }}</p>
+  `,
+})
+export class App {
+  yourService = inject(YourService);
+
+  display = this.yourService.getYourModel().join(' ⭐️ ');
+}
+```
+
+Or use the constructor + ngOnInit
+```
+...
+import { Component, OnInit } from '@angular/core';
+
+export class YourComponent implements OnInit {...}
+
+constructor(private yourService: YourService) {
+...
+}
+
+ngOnInit() {
+  this.yourProperty = this.yourService.getYourData();
+}
+```
+
+<br><br>
+
+## Pipes
+Special operator in Angular template expressions that allows you to transform data. Pipes are functions that accept an input value and return a transformed value. 
+
+Angular pipes use the vertical bar character (|).
+
+There some built-in pipelines that you can import or your can create your own: https://angular.dev/guide/templates/pipes
+
+You can use multiple pipes and pass parameters:
+
+```
+<p>The event will occur on {{ scheduledOn | date | uppercase }}.</p>
+
+<p>The event will occur at {{ scheduledOn | date:'hh:mm':'UTC' }}.</p>
+```
+
+Always use parentheses in your expressions when operator precedence may be ambiguous. Because the pipe operator has lower precedence than other binary operators, including +, -, *, /, %, &&, ||, and ??. And has higher precedence than the conditional (ternary) operator.
+
+```
+{{ (isAdmin ? 'Access granted' : 'Access denied') | uppercase }}
+```
+
 
 <br><br>
 
 ## To optimize image loading
 
 https://angular.dev/tutorials/learn-angular/11-optimizing-images
+
+<br><br>
+
+
+## HttpClient
+
+Para simular um backend, você pode usar o JSON-Server (https://www.npmjs.com/package/json-server?activeTab=readme)
+
+https://angular.dev/guide/http
+
+Add the provider, in app.config.ts or NgModule
+
+```
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideHttpClient(),
+  ]
+};
+```
+
+Inject in your componenets or services
+```
+@Injectable({providedIn: 'root'})
+export class ConfigService {
+  private http = inject(HttpClient);
+  // This service can now make HTTP requests via `this.http`.
+}
+```
+
+Or through the constructor (tutorial)
+```
+import { HttpClient } from '@angular/common/http';
+...
+constructor(private http: HttpClient) {}
+```
+
+Fetch JSON data no seu SERVICE
+O retorno é sempre um Observable, então precisa importar
+```
+import { Observable } from 'rxjs';
+
+listarDados(): Observable<yourType> {
+  http.get<yourType>('/apiUrl').subscribe(yourData => {
+    // process the data.
+  });
+}
+```
+
+INSCREVA o método para receber os dados
+```
+import { YourService } from '../../services/yourService.service';
+...
+
+ngOnInit() {
+  this.yourService.listarDados().subscribe(yourData => {
+    this.yourPorperty = yourData;
+  });
+}
+```
+
