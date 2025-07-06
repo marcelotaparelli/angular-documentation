@@ -440,9 +440,7 @@ O retorno é sempre um Observable, então precisa importar
 import { Observable } from 'rxjs';
 
 listarDados(): Observable<yourType> {
-  http.get<yourType>('/apiUrl').subscribe(yourData => {
-    // process the data.
-  });
+  return this.http.get<yourType>('/apiUrl');
 }
 ```
 
