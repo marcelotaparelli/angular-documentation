@@ -232,13 +232,55 @@ Invalide o botão de submit
         type="submit">Enviar</button>
 ```
 
-<br><br>
-
 Para resetar o formulário
 
 ```
 this.yourForm.reset();
 ```
+
+Para enviar o id por um link
+importar RounterLink no .ts do componente
+
+```
+<button [routerLink]="['/sua-url', id]">
+```
+
+Para receber dados da URL
+```
+import { ActivatedRoute } from '@angular/core';
+...
+export class YourComponent implements OnInit {
+
+  yourModel: YourModel = {...};
+
+  activatedRoute = inject(ActivatedRoute);
+  yourService = inject(YourService);
+
+  ngOnInit(): void {
+    const id =         this.activatedRoute.snapshot.paramMap.get('id);
+    this.yourService.suaFuncaoPorId(paserInt(id!)).subscribe(yourModel => {
+      this.yourModel = yourModel;
+    })
+  }
+}
+```
+
+
+Para receber os dados no componente 
+```
+import { Input } from '@angular/core';
+
+export class YourComponent {
+  @Input() yourDataName: yourType''
+  ...
+}
+
+//no .html de onde quer importar
+
+<app-your- component [yourData]="yourModel.yourData" />
+```
+
+<br><br>
 
 ## Router
 
@@ -454,5 +496,67 @@ ngOnInit() {
     this.yourPorperty = yourData;
   });
 }
+```
+
+Service completo
+```
+import { Injectable } from '@angular/core';
+import { YourModel } from '../componentes/your-model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class YourModelService {
+  private readonly API = 'yourAPIUrl';
+
+  constructor(private http: HttpClient) {}
+  obterYourModel(): Observable<Contato[]> {
+    return this.http.get<YourModel[]>(this.API);
+  }
+
+  salvarYourModel(yourModel: YourModel): Observable<YourModel> {
+    return this.http.post<YourModel>(this.API, contato);
+  }
+
+  obterYourModelPorId(id:number): Observable<YourModel> {
+    return this.http.get<YourModel>(`${this.API}/${id}`);
+  }
+
+  deletarYourModel(id: number) {
+    return this.http.delete<YourModel>(`${this.API}/${id}`);
+  }
+
+}
+
+// depois, inscreva as funções nos services que quiser:
+
+  contato: YourModel = {
+    id: 0,
+    nome: '',
+    telefone: '',
+    email: ''
+  };
+  
+ yourModelService = inject(YourModelService); 
+  activatedRoute = inject(ActivatedRoute);
+  router = inject(Router)
+
+  ngOnInit(): void {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.contatoService.obterYourModelPorId(parseInt(id!)).subscribe(yourModel => {
+      this.yourModel = yourModel;
+    })
+  }
+
+  deletar() {
+    this.yourModelService.deletarYourModel(this.yourModel.id!).subscribe(() => {
+      this.router.navigateByUrl('/yourHome');
+    });
+  
+
+
 ```
 
