@@ -265,6 +265,16 @@ export class YourComponent implements OnInit {
 }
 ```
 
+Para completar o form 
+```
+   carregarDados() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.dadosService.obterDadoPorId(parseInt(id!)).subscribe(dado => {
+      this.dadoForm.patchValue(contato);  
+    }) 
+  
+```
+
 
 Para receber os dados no componente 
 ```
