@@ -529,6 +529,11 @@ export class YourModelService {
     return this.http.delete<YourModel>(`${this.API}/${id}`);
   }
 
+
+  editarContato(contato: Contato): Observable<Contato> {
+    return this.http.put<Contato>(`${this.API}/${contato.id}`, contato);
+  }
+
 }
 
 // depois, inscreva as funções nos services que quiser:
