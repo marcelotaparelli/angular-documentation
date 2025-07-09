@@ -453,10 +453,17 @@ https://angular.dev/tutorials/learn-angular/11-optimizing-images
 
 <br><br>
 
-
-## HttpClient
+## Para simular um backend
 
 Para simular um backend, você pode usar o JSON-Server (https://www.npmjs.com/package/json-server?activeTab=readme)
+
+- Crie uma pasta para seu backend e rode "npm init -y" dentro dela
+- rode "npm i -g json-server"
+  
+
+<br><br>
+
+## HttpClient
 
 https://angular.dev/guide/http
 
