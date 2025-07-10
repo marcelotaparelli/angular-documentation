@@ -459,7 +459,7 @@ Para simular um backend, você pode usar o JSON-Server (https://www.npmjs.com/pa
 
 - Crie uma pasta para seu backend e rode "npm init -y" dentro dela
 - rode "npm i -g json-server"
-- mude o package.json: de test para "start": "json-server --watch db.json --port 3000"
+- mude o package.json: de test para "start": "json-server --watch db.json --port 3000" ( ou rode "npx json-server db.json" depois de ter criado o db.json)
 - crie um arquivo na pasta backend: db.json
 - neste arquivo vc cria os endpoints como:
 ```
